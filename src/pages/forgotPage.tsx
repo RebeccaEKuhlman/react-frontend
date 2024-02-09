@@ -7,16 +7,16 @@ function SetPassword() {
     const [password, setPassword] = React.useState<string | undefined>();
     const navigate = useNavigate()
     const {id, token} = useParams()
-
+    const [email, setEmail] = useState()
+ 
     axios.defaults.withCredentials = true;
     const handleSubmit = (event: FormEvent) => {
       event.preventDefault() 
        // axios.post(`http://localhost:3001/reset-password/${id}/${token}`, {password})
-        axios.post(`http://localhost:9000/password-reset-link`, {password})
+        axios.post(`http://localhost:9000/password-reset-link`, {email})
         .then(res => {
-            if(res.data.Status === "Success") {
+            if(res.data.Status === "Successfully reset password") {
                 navigate('/login')
-               
             }
         }).catch(err => console.log(err))
     }
@@ -27,6 +27,14 @@ function SetPassword() {
         <h4>Reset Password</h4>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
+          <input
+              type="email"
+              placeholder="Enter Email"
+              autoComplete="off"
+              name="email"
+              className="form-control rounded-0"
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <label htmlFor="email">
               <strong>New Password</strong>
             </label>

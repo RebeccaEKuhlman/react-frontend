@@ -4,6 +4,7 @@ import LoginPage from './pages/login/LoginPage';
 import UserProfile from './pages/user/Profile';
 import RegistrationPage from './pages/login/RegistrationPage';
 import Home from './pages/Home';
+import SetPassword from './pages/forgotPage'
 import './stylesheets/App.css';
 // import { fakeAuthProvider } from "./auth";
 const App: React.FC = () => {
@@ -12,7 +13,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/register" element={<RegistrationPage/>}/>
-          <Route path="/register" element={<RegistrationPage/>}/>
+          <Route path="/forgot-password" element={<SetPassword/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/profile" element={<UserProfile />} />
           <Route path="*" element={<LoginPage/>} />

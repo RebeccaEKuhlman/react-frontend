@@ -1,25 +1,60 @@
 import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
+import AuthService from '../services/auth';
+import {
+  Box,
+  Button,
+  Container,
+  FormHelperText,
+  TextField,
+  Typography,
+} from '@mui/material';
+
 
 
 function SetPassword() {
-    const [password, setPassword] = React.useState<string | undefined>();
+    //const [password, setPassword] = React.useState<string | undefined>();
     const navigate = useNavigate()
     const {id, token} = useParams()
-    const [email, setEmail] = useState()
- 
-    axios.defaults.withCredentials = true;
+    const [email, setEmail] = React.useState("");
+    const apiUrl = "https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link"
+    // axios.defaults.withCredentials = true;
     const handleSubmit = (event: FormEvent) => {
       event.preventDefault() 
+      console.log("in submit")
+      console.log(email)
+      AuthService.forgotPassword(email)
+      console.log('Response:', Response);
+
+   /*   axios.post(apiUrl, {email})
+        .then(res => {
+            if(res.data.Status === "Successfully reset password") {
+                //navigate('/login')
+                console.log(Response)
+            }
+        }).catch(err => console.log(err))
+
        // axios.post(`http://localhost:3001/reset-password/${id}/${token}`, {password})
-        axios.post(`http://localhost:9000/password-reset-link`, {email})
+       /*axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {email})
+       axios.post(`http://localhost:9000/password-reset-link`, {email})
         .then(res => {
             if(res.data.Status === "Successfully reset password") {
                 navigate('/login')
             }
-        }).catch(err => console.log(err))
+        }).catch(err => console.log(err))*/
+       // axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {
+         // email: email
+      //})
+    /*  .then(response => {
+          console.log('Response:', response.data);
+          navigate("/login");
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });*/
     }
+
 
     return(
         <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
@@ -27,27 +62,10 @@ function SetPassword() {
         <h4>Reset Password</h4>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-          <input
-              type="email"
-              placeholder="Enter Email"
-              autoComplete="off"
-              name="email"
-              className="form-control rounded-0"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label htmlFor="email">
-              <strong>New Password</strong>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-              className="form-control rounded-0"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+          <TextField label="Email Address" margin="normal" required fullWidth autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
           </div>
           <button type="submit" className="btn btn-success w-100 rounded-0">
-            Update
+            Send reset email
           </button>
           </form>
         

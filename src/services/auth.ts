@@ -11,6 +11,20 @@ const register = (username: string, email: string, password: string) => {
   });
 };
 
+const forgotPassword = (email: string) => {
+  console.log(email)
+  /*return axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {
+    email
+  });*/
+  axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {email})
+        .then(res => {
+            if(res.data.Status === "Successfully reset password") {
+                //navigate('/login')
+                console.log(res)
+            }
+        }).catch(err => console.log(err))
+};
+
 const login = (username: string, password: string) => {
   return axios
     .post(USER_API_URL + "login", {
@@ -63,6 +77,7 @@ const fakeAuthProvider = {
     login,
     logout,
     getCurrentUser,
+    forgotPassword,
     fakeAuthProvider,
   }
   

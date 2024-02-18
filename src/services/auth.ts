@@ -16,7 +16,7 @@ const forgotPassword = (email: string) => {
   /*return axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {
     email
   });*/
-  axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {email})
+  return axios.post("http://localhost:9000/password-reset-link", {email})
         .then(res => {
             if(res.data.Status === "Successfully reset password") {
                 //navigate('/login')
@@ -36,7 +36,6 @@ const login = (username: string, password: string) => {
       if (response.data.user) {
         localStorage.setItem("user", JSON.stringify(response.data.user));
       }
-
       return response.data;
     });
 };

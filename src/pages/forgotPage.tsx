@@ -14,17 +14,17 @@ import {
 
 
 function SetPassword() {
-    //const [password, setPassword] = React.useState<string | undefined>();
     const navigate = useNavigate()
-    const {id, token} = useParams()
+    const {id} = useParams()
     const [email, setEmail] = React.useState("");
-    const apiUrl = "https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link"
+  //  const apiUrl = "https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link"
+    const { token } = useParams<{ token: string }>();
+
     // axios.defaults.withCredentials = true;
     const handleSubmit = (event: FormEvent) => {
       event.preventDefault() 
-      console.log("in submit")
-      console.log(email)
-      AuthService.forgotPassword(email)
+      console.log("forgot page in submit")
+      const response = AuthService.forgotPassword(email)
       console.log('Response:', Response);
 
    /*   axios.post(apiUrl, {email})

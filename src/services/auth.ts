@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const USER_API_URL = "http://localhost:9000/user/";
-// const USER_API_URL = "https://9429d5b9-a4ce-43d8-bf6b-637cc223febe.mock.pstmn.io/";
+const API_URL = "http://localhost:9000/api/";
 
 const register = (username: string, email: string, password: string) => {
   return axios.post(USER_API_URL + "signup", {
@@ -13,12 +13,9 @@ const register = (username: string, email: string, password: string) => {
 
 const forgotPassword = (email: string) => {
   console.log(email)
-  /*return axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {
-    email
-  });*/
-  return axios.post("http://localhost:9000/password-reset-link", {email})
+  return axios.post(API_URL + "password-reset-link", {email})
         .then(res => {
-            if(res.data.Status === "Successfully reset password") {
+            if(res.data.Status === "Successfully sent email") {
                 //navigate('/login')
                 console.log(res)
             }

@@ -1,33 +1,21 @@
-import React, { useState, FormEvent } from 'react';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { FormEvent } from 'react';
+import {useNavigate, useParams} from "react-router-dom";
 import axios from 'axios'
-import AuthService from '../services/auth';
-import {
-  Box,
-  Button,
-  Container,
-  FormHelperText,
-  TextField,
-  Typography,
-} from '@mui/material';
-
 
 
 function ResetPassword() {
-    //const [password, setPassword] = React.useState<string | undefined>();
     const navigate = useNavigate()
     const [password, setPassword] = React.useState("");
     const { token } = useParams<{ token: string }>();
 
-    // axios.defaults.withCredentials = true;
     const handleSubmit = (event: FormEvent) => {
         console.log("ResetPassword submit")
         event.preventDefault() 
-        axios.post(`http://localhost:9000/user/password-reset-link`, {token, password})
-
+        axios.post(`http://localhost:9000/api/password-confirm`, {token, password})
             .then(res => {
                 if(res.data.Status === "Success") {
-                    navigate('/login')
+                  console.log(res)
+                  navigate('/login') 
                 }
             }).catch(err => console.log(err))
     }

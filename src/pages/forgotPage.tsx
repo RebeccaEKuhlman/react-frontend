@@ -14,45 +14,13 @@ import {
 
 
 function SetPassword() {
-    const navigate = useNavigate()
-    const {id} = useParams()
     const [email, setEmail] = React.useState("");
-  //  const apiUrl = "https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link"
-    const { token } = useParams<{ token: string }>();
 
-    // axios.defaults.withCredentials = true;
     const handleSubmit = (event: FormEvent) => {
       event.preventDefault() 
       console.log("forgot page in submit")
       const response = AuthService.forgotPassword(email)
       console.log('Response:', Response);
-
-   /*   axios.post(apiUrl, {email})
-        .then(res => {
-            if(res.data.Status === "Successfully reset password") {
-                //navigate('/login')
-                console.log(Response)
-            }
-        }).catch(err => console.log(err))
-
-       // axios.post(`http://localhost:3001/reset-password/${id}/${token}`, {password})
-       /*axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {email})
-       axios.post(`http://localhost:9000/password-reset-link`, {email})
-        .then(res => {
-            if(res.data.Status === "Successfully reset password") {
-                navigate('/login')
-            }
-        }).catch(err => console.log(err))*/
-       // axios.post("https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link", {
-         // email: email
-      //})
-    /*  .then(response => {
-          console.log('Response:', response.data);
-          navigate("/login");
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });*/
     }
 
 
